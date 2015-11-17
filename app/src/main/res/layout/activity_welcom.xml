@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+                android:background="@mipmap/logo_bg">
+
+    <TextView
+        android:id="@+id/welcom_center"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerVertical="true"/>
+    <ImageView
+        android:id="@+id/welcom_shan"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/welcom_center"
+        android:layout_marginTop="50dp"
+        android:src="@mipmap/logo_shan"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/welcom_li"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="120dp"
+        android:src="@mipmap/logo_li"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/welcom_zhu"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/welcom_center"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/logo_zhu"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/welcom_shou"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:src="@mipmap/logo_shou"
+        android:visibility="gone"/>
+
+</RelativeLayout>
