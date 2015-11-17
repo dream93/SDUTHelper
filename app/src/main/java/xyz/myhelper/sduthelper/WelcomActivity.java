@@ -25,6 +25,10 @@ public class WelcomActivity extends AppCompatActivity {
     // 字的补间动画
     private TranslateAnimation shanAnimation, liAnimation, zhuAnimation, shouAnimation;
 
+    // 设置水平位移和垂直位移的时间
+    private final static int HORIZONTAL_DURING_TIME = 200;
+    private final static int VERTICAL_DURING_TIME = 800;
+
     // 标记位
     private boolean isFirst;
 
@@ -52,7 +56,7 @@ public class WelcomActivity extends AppCompatActivity {
         shanAnimation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, -1, Animation.RELATIVE_TO_PARENT, 0.1f,
                 Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);
-        shanAnimation.setDuration(300);
+        shanAnimation.setDuration(HORIZONTAL_DURING_TIME);
         shanAnimation.setFillAfter(true);
         shanIv.setVisibility(View.VISIBLE);
         shanIv.setAnimation(shanAnimation);
@@ -62,7 +66,7 @@ public class WelcomActivity extends AppCompatActivity {
         liAnimation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
                 Animation.RELATIVE_TO_SELF, -1, Animation.RELATIVE_TO_PARENT, 0.6f);
-        liAnimation.setDuration(800);
+        liAnimation.setDuration(VERTICAL_DURING_TIME);
         liAnimation.setFillAfter(true);
         liAnimation.setAnimationListener(new ImgAnimListener());
 
@@ -70,7 +74,7 @@ public class WelcomActivity extends AppCompatActivity {
         zhuAnimation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, 1, Animation.RELATIVE_TO_PARENT, -0.3f,
                 Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);
-        zhuAnimation.setDuration(500);
+        zhuAnimation.setDuration(HORIZONTAL_DURING_TIME);
         zhuAnimation.setFillAfter(true);
         zhuAnimation.setAnimationListener(new ImgAnimListener());
 
@@ -78,7 +82,7 @@ public class WelcomActivity extends AppCompatActivity {
         shouAnimation = new TranslateAnimation(
                 Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
                 Animation.RELATIVE_TO_SELF, 1, Animation.RELATIVE_TO_PARENT, -0.33f);
-        shouAnimation.setDuration(200);
+        shouAnimation.setDuration(VERTICAL_DURING_TIME);
         shouAnimation.setFillAfter(true);
         shouAnimation.setAnimationListener(new ImgAnimListener());
     }
@@ -108,15 +112,15 @@ public class WelcomActivity extends AppCompatActivity {
             } else if (animation == zhuAnimation) {
                 shouIv.setVisibility(View.VISIBLE);
                 shouIv.startAnimation(shouAnimation);
-            }else if (animation == shouAnimation){
-                if (isFirst){ // 第一次进入，则跳转到向导界面
+            } else if (animation == shouAnimation) {
+                if (isFirst) { // 第一次进入，则跳转到向导界面
                     goToGuide();
-                }else { // 否则检查版本
-                    if (version.equals(VersionCheck.getVersionName(WelcomActivity.this))){
+                } else { // 否则检查版本
+                    if (version.equals(VersionCheck.getVersionName(WelcomActivity.this))) {
 
                         // 版本号一致，跳转主页面
                         goToMain();
-                    }else{ // 版本号不一致，说明有更新或回退，进入向导页
+                    } else { // 版本号不一致，说明有更新或回退，进入向导页
                         goToGuide();
                     }
 
@@ -129,13 +133,17 @@ public class WelcomActivity extends AppCompatActivity {
 
         }
     }
+
     private void goToGuide() {
         Intent intent = new Intent(this, GuideActivity.class);
         startActivity(intent);
+        finish(); // 进入后不用再返回此页面
     }
+
     private void goToMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
 }
