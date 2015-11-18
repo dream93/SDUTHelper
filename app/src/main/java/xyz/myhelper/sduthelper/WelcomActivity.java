@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -96,6 +97,7 @@ public class WelcomActivity extends AppCompatActivity {
                 SharedPreferences pref = getSharedPreferences("first", MODE_PRIVATE);
                 isFirst = pref.getBoolean("isFirst", true); // 得到存储中的进入状态
                 version = pref.getString("version", "1.0"); // 得到存储中的版本号
+                Log.i("MyTag", version);
             }
 
 
@@ -114,6 +116,7 @@ public class WelcomActivity extends AppCompatActivity {
                 shouIv.startAnimation(shouAnimation);
             } else if (animation == shouAnimation) {
                 if (isFirst) { // 第一次进入，则跳转到向导界面
+                    Log.i("MyTag", " " + isFirst);
                     goToGuide();
                 } else { // 否则检查版本
                     if (version.equals(VersionCheck.getVersionName(WelcomActivity.this))) {

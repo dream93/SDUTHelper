@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -93,12 +94,12 @@ public class GuideActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             // 按下按钮，代表已经进入，置为true
-            SharedPreferences pref = getSharedPreferences("frist", MODE_PRIVATE);
+            SharedPreferences pref = getSharedPreferences("first", MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
-            editor.putBoolean("isFirst", true);
+            editor.putBoolean("isFirst", false);
             editor.putString("version", VersionCheck.getVersionName(GuideActivity.this));
             editor.apply(); // 需要提交才能生效
-
+            Log.i("MyTag", VersionCheck.getVersionName(GuideActivity.this));
             // 跳转到主页面
             Intent intent = new Intent(GuideActivity.this, MainActivity.class);
             startActivity(intent);

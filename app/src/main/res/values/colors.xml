@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#ff00b2f0</color>
+    <color name="colorPrimaryDark">#ff00b2f0</color>
+    <color name="colorAccent">#ffFF4081</color>
+    <color name="colorWindowBg">#fff7f8fa</color>
+    <color name="radioGroupBg">#ffebecee</color>o
+    <color name="colorBlack">#ff000000</color>
+    <color name="colorTextTip">#ff999999</color>
+    <color name="colorBtnTrue">#ffffffff</color>
+    <color name="colorBtnFalse">#ff0080ff</color>
+    <color name="colorcheckBg">#ffaaaaaa</color>
 </resources>
