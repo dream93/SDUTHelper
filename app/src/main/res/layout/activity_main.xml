@@ -5,6 +5,12 @@
                 android:layout_height="match_parent"
                 tools:context=".MainActivity">
 
+	<FrameLayout
+		android:id="@+id/main_fragment_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@+id/bottom_bar_radioGraoup"></FrameLayout>
+
 	<RadioGroup
 		android:id="@+id/bottom_bar_radioGraoup"
 		android:layout_width="match_parent"

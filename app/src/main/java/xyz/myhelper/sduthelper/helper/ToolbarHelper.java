@@ -1,4 +1,4 @@
-package xyz.myhelper.sduthelper.ui;
+package xyz.myhelper.sduthelper.helper;
 
 import android.content.Context;
 import android.content.res.TypedArray;

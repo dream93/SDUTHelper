@@ -1,8 +1,24 @@
 <resources>
     <string name="app_name">山理助手</string>
     <string name="subTitle">山理学子的一站式服务APP</string>
+
+    <!-- 应用操作 -->
+    <string name="exitTip">再按一次退出</string>
+
+    <!-- 登陆有关的字符串 -->
+    <string name="login">登陆</string>
+    <string name="noNet">离线</string>
+    <string name="exitLogin">退出登陆</string>
+    <string name="input_studentId">请输入学号</string>
+    <string name="input_jwcPsw">请输入教务处密码</string>
+    <string name="autoLogin">自动登陆</string>
+    <string name="rememberLogin">记录密码</string>
+
+    <!-- 课表有关的字符串 -->
+    <string name="schedule_login">课表登陆</string>
     <string name="schedule">课表</string>
-    <string name="mySchedule">我的课表</string>
+    <string name="my_schedule">我的课表</string>
+
     <string name="life">生活</string>
     <string name="learn">学习</string>
     <string name="query">查询</string>
@@ -16,18 +32,11 @@
     <string name="query_lifecard">校园卡查询</string>
     <string name="query_samename">同名查询</string>
     <string name="share">分享</string>
-    <string name="input_studentId">请输入学号</string>
-    <string name="input_jwcPsw">请输入教务处密码</string>
     <string name="serial_number">序号</string>
     <string name="subject_name">科目名称</string>
     <string name="grade_score">学分</string>
     <string name="divideLine">分割线</string>
-    <string name="login">登陆</string>
-    <string name="noNet">离线</string>
     <string name="schduleTip">如果确认密码无误，提示无法登陆，请反馈给我</string>
-    <string name="autoLogin">自动登陆</string>
-    <string name="rememberLogin">记录密码</string>
-    <string name="exitLogin">退出登陆</string>
     <string name="message_image_desc">Message Image</string>
     <string name="user_feedback">用户反馈</string>
     <string name="action_settings">Settings</string>

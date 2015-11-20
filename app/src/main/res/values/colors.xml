@@ -10,4 +10,5 @@
     <color name="colorBtnTrue">#ffffffff</color>
     <color name="colorBtnFalse">#ff0080ff</color>
     <color name="colorcheckBg">#ffaaaaaa</color>
+    <color name="colorBgInput">#608080</color>
 </resources>
