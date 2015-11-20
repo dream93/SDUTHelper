@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".GpaActivity">
+
+	<TextView
+		android:id="@+id/allGPA_showId"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:textColor="@color/colorBlack"
+		android:textSize="16sp"/>
+
+	<TextView
+		android:id="@+id/allGPA_showInfo"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/allGPA_showId"
+		android:textColor="@color/colorBlack"/>
+
+	<ImageView
+		android:id="@+id/allGPA_line"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_below="@id/allGPA_showInfo"
+		android:background="@color/colorBlack"/>
+
+	<ListView
+		android:id="@+id/gpa_show_list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@id/allGPA_line"
+		android:divider="#000"
+		android:dividerHeight="1dp">
+	</ListView>
+
+</RelativeLayout>

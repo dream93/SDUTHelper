@@ -2,6 +2,7 @@ package xyz.myhelper.sduthelper.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,9 +84,10 @@ public class ScheduleAdapter extends BaseAdapter {
                     vh.list_1.setTextColor(Color.WHITE);
                     vh.list_1.setOnClickListener(new TextClick());
                 }
-
             }else {
                 vh.list_1.setTextColor(Color.WHITE);
+                vh.list_1.setText("");
+                vh.list_1.setBackgroundColor(Color.WHITE);
             }
         }
 
@@ -109,11 +111,13 @@ public class ScheduleAdapter extends BaseAdapter {
 
             }else {
                 vh.list_2.setTextColor(Color.WHITE);
+                vh.list_2.setText("");
+                vh.list_2.setBackgroundColor(Color.WHITE);
             }
         }
 
         if (schedule.getWedLesson() != null && !"".equals(schedule.getWedLesson())){
-            LessonBean[] lessonBean = schedule.getTueLesson();
+            LessonBean[] lessonBean = schedule.getWedLesson();
             if (lessonBean != null && lessonBean.length != 0){
                 if (lessonBean.length == 1) {
                     // 该节课只有一天，该控件不恩能够点击
@@ -132,6 +136,8 @@ public class ScheduleAdapter extends BaseAdapter {
 
             }else {
                 vh.list_3.setTextColor(Color.WHITE);
+                vh.list_3.setText("");
+                vh.list_3.setBackgroundColor(Color.WHITE);
             }
         }
 
@@ -155,6 +161,8 @@ public class ScheduleAdapter extends BaseAdapter {
 
             }else {
                 vh.list_4.setTextColor(Color.WHITE);
+                vh.list_4.setText("");
+                vh.list_4.setBackgroundColor(Color.WHITE);
             }
         }
 
@@ -178,6 +186,8 @@ public class ScheduleAdapter extends BaseAdapter {
 
             }else {
                 vh.list_5.setTextColor(Color.WHITE);
+                vh.list_5.setText("");
+                vh.list_5.setBackgroundColor(Color.WHITE);
             }
         }
 
@@ -201,6 +211,8 @@ public class ScheduleAdapter extends BaseAdapter {
 
             }else {
                 vh.list_6.setTextColor(Color.WHITE);
+                vh.list_6.setText("");
+                vh.list_6.setBackgroundColor(Color.WHITE);
             }
         }
 
@@ -224,6 +236,8 @@ public class ScheduleAdapter extends BaseAdapter {
 
             }else {
                 vh.list_7.setTextColor(Color.WHITE);
+                vh.list_7.setText("");
+                vh.list_7.setBackgroundColor(Color.WHITE);
             }
         }
 

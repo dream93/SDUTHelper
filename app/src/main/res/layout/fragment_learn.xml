@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="xyz.myhelper.sduthelper.fragment.LearnFragment">
+
+	<RadioGroup
+		android:id="@+id/learn_choice_group"
+		android:layout_width="match_parent"
+		android:layout_height="44dp"
+		android:layout_marginTop="30dp"
+		android:layout_marginLeft="30dp"
+		android:layout_marginRight="30dp"
+		android:layout_marginBottom="10dp"
+		android:orientation="horizontal" >
+
+		<RadioButton
+			android:id="@+id/learn_gpa_choice"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1.00"
+			android:button="@null"
+			android:gravity="center"
+			android:checked="true"
+			android:background="@drawable/radio_button_left_style"
+			android:text="@string/gpa_cur"
+			android:textColor="@color/radiobtn_select_text_color" />
+
+		<RadioButton
+			android:id="@+id/learn_zf_choice"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1.00"
+			android:button="@null"
+			android:gravity="center"
+			android:background="@drawable/radio_button_right_style"
+			android:text="@string/zf_login"
+			android:textColor="@color/radiobtn_select_text_color" />
+	</RadioGroup>
+
+	<android.support.v4.view.ViewPager
+		android:id="@+id/learn_viewPager"
+		android:layout_marginTop="10dp"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@id/learn_choice_group" >
+	</android.support.v4.view.ViewPager>
+
+</RelativeLayout>

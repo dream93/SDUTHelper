@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.RadioGroup;
 
+import xyz.myhelper.sduthelper.fragment.LearnFragment;
 import xyz.myhelper.sduthelper.fragment.ScheduleFragment;
 import xyz.myhelper.sduthelper.helper.FragmentHelper;
 import xyz.myhelper.sduthelper.utils.ToastUtil;
@@ -18,7 +19,7 @@ import xyz.myhelper.sduthelper.utils.ToastUtil;
  */
 public class MainActivity extends BaseActivity {
 
-    private ScheduleFragment fragment;
+    private Fragment fragment;
     private FragmentHelper helper;
     private long mExitTime;
 
@@ -45,7 +46,13 @@ public class MainActivity extends BaseActivity {
                 case R.id.bottom_bar_scheduleBtn:
                     fragment = new ScheduleFragment();
                     break;
+                case R.id.bottom_bar_learnBtn:
+                    fragment = new LearnFragment();
+                    break;
             }
+            helper.setTargetFragment(fragment);
+            helper.setIsClearBackTask(true);
+            fragmentChange(helper);
         }
     }
 
