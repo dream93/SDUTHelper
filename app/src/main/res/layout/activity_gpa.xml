@@ -18,12 +18,19 @@
 		android:layout_height="wrap_content"
 		android:layout_below="@id/allGPA_showId"
 		android:textColor="@color/colorBlack"/>
+	<TextView
+		android:id="@+id/allGpa_showGpa"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:textColor="@color/colorBlack"
+		android:layout_below="@id/allGPA_showInfo"
+		/>
 
 	<ImageView
 		android:id="@+id/allGPA_line"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:layout_below="@id/allGPA_showInfo"
+		android:layout_below="@id/allGpa_showGpa"
 		android:background="@color/colorBlack"/>
 
 	<ListView

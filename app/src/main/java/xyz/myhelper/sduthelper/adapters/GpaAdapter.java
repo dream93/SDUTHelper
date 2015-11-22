@@ -1,6 +1,9 @@
 package xyz.myhelper.sduthelper.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +61,29 @@ public class GpaAdapter extends BaseAdapter {
         viewHolder.serial.setText(gpa.getSerial());
         viewHolder.subject.setText(gpa.getSubject());
         viewHolder.grade.setText(gpa.getGrade());
-        if (gpa.getOriginalGrade() != null && !"".equals(gpa.getOriginalGrade())) {
+        if (gpa.getNewGrade() != null && !"".equals(gpa.getNewGrade())) {
+            if ("缺考".equals(gpa.getNewGrade())){
+                viewHolder.score.setBackgroundColor(Color.RED);
+            }else if (Double.parseDouble(gpa.getNewGrade()) < 60) {
+                viewHolder.score.setBackgroundColor(Color.RED);
+            } else {
+                viewHolder.score.setBackgroundColor(Color.WHITE);
+            }
+        }else {
+            viewHolder.score.setBackgroundColor(Color.WHITE);
+        }
+        if (gpa.getNewGrade() != null && !" ".equals(gpa.getNewGrade()) && !"".equals(gpa.getNewGrade())) {
             viewHolder.score.setText(gpa.getOriginalGrade() + "/" + gpa.getNewGrade());
-        } else {
+        }else {
             viewHolder.score.setText(gpa.getOriginalGrade());
+        }
+
+        if ("第二".equals(gpa.getMethod()) || "第二专业".equals(gpa.getMethod())){
+            viewHolder.subject.setBackgroundColor(Color.GRAY);
+        }else if ("公选课".equals(gpa.getClasses())){
+            viewHolder.subject.setBackgroundColor(Color.CYAN);
+        }else {
+            viewHolder.subject.setBackgroundColor(Color.WHITE);
         }
         return convertView;
     }

@@ -1,7 +1,5 @@
 package xyz.myhelper.sduthelper.dataparse;
 
-import android.util.Log;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -35,21 +33,18 @@ public class GpaParse {
         // 解析成绩数据
         Element gradeInfo = cjdoc.select("table[width=100%][border=1][align=center][cellspacing=0][cellpadding=1]").get(2);
         Elements trElements = gradeInfo.select("tr");
-        Log.i("MyTag", "the size = " + trElements.size());
         for (int i = 1; i < trElements.size(); i++) {
             Elements subjectInfo = trElements.get(i).select("td");
-            if (subjectInfo.get(0).text().contains("没有")){
-                return null;
-            }
             GpaBean gpa = new GpaBean();
-            gpa.setSerial(subjectInfo.get(0).text());
-            gpa.setSchoolYear(subjectInfo.get(1).text());
-            gpa.setTerm(subjectInfo.get(2).text());
-            gpa.setClasses(subjectInfo.get(3).text());
-            gpa.setSubject(subjectInfo.get(5).text());
-            gpa.setGrade(subjectInfo.get(7).text());
-            gpa.setOriginalGrade(subjectInfo.get(9).text());
-            gpa.setNewGrade(subjectInfo.get(10).text());
+            gpa.setSerial(subjectInfo.get(0).text().replaceAll("\\s*", ""));
+            gpa.setSchoolYear(subjectInfo.get(1).text().replaceAll("\\s*", ""));
+            gpa.setTerm(subjectInfo.get(2).text().replaceAll("\\s*", ""));
+            gpa.setClasses(subjectInfo.get(3).text().replaceAll("\\s*", ""));
+            gpa.setSubject(subjectInfo.get(5).text().replaceAll("\\s*", ""));
+            gpa.setGrade(subjectInfo.get(7).text().replaceAll("\\s*", ""));
+            gpa.setMethod(subjectInfo.get(8).text().replaceAll("\\s*", ""));
+            gpa.setOriginalGrade(subjectInfo.get(9).text().replaceAll("\\s*", ""));
+            gpa.setNewGrade(subjectInfo.get(10).text().replaceAll("\\s*", ""));
             gpaLists.add(gpa);
         }
 

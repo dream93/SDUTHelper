@@ -15,7 +15,7 @@ public class GpaBean {
     private String subject; // 课程名称
     // private String perod; // 学时 成绩查询系统暂未开通此项
     private String grade; // 学分
-    // private String method; // 考核方式 成绩查询系统暂未开通
+    private String method; // 考核方式 辨别是否为双学位
     private String originalGrade; //原考成绩
     private String newGrade; // 补考成绩
     // private String courseGpa; // 课程绩点 成绩查询系统暂未开通
@@ -68,6 +68,14 @@ public class GpaBean {
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
     }
 
     public String getOriginalGrade() {
