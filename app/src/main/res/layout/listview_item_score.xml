@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
+
+	<TextView
+		android:id="@+id/item_score_subject"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_weight="3"/>
+	<ImageView
+		android:layout_width="0.1dp"
+		android:layout_height="match_parent"
+		android:background="@color/colorBlack"/>
+
+	<TextView
+		android:id="@+id/item_score_type"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_weight="1"/>
+	<ImageView
+		android:layout_width="0.1dp"
+		android:layout_height="match_parent"
+		android:background="@color/colorBlack"/>
+
+	<TextView
+		android:id="@+id/item_score_grade"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_weight="1"/>
+	<ImageView
+		android:layout_width="0.1dp"
+		android:layout_height="match_parent"
+		android:background="@color/colorBlack"/>
+
+	<TextView
+		android:id="@+id/item_score_ori"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_weight="1"/>
+	<ImageView
+		android:layout_width="0.1dp"
+		android:layout_height="match_parent"
+		android:background="@color/colorBlack"/>
+
+	<TextView
+		android:id="@+id/item_score_mid"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_weight="1"/>
+	<ImageView
+		android:layout_width="0.1dp"
+		android:layout_height="match_parent"
+		android:background="@color/colorBlack"/>
+
+	<TextView
+		android:id="@+id/item_score_end"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_weight="1"/>
+	<ImageView
+		android:layout_width="0.1dp"
+		android:layout_height="match_parent"
+		android:background="@color/colorBlack"/>
+
+	<TextView
+		android:id="@+id/item_score_test"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_weight="1"/>
+	<ImageView
+		android:layout_width="0.1dp"
+		android:layout_height="match_parent"
+		android:background="@color/colorBlack"/>
+
+	<TextView
+		android:id="@+id/item_score_score"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_weight="1"/>
+	<ImageView
+		android:layout_width="0.1dp"
+		android:layout_height="match_parent"
+		android:background="@color/colorBlack"/>
+
+	<TextView
+		android:id="@+id/item_score_is"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_weight="1"/>
+	<ImageView
+		android:layout_width="0.1dp"
+		android:layout_height="match_parent"
+		android:background="@color/colorBlack"/>
+
+	<TextView
+		android:id="@+id/item_score_college"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_weight="2"/>
+	<ImageView
+		android:layout_width="0.1dp"
+		android:layout_height="match_parent"
+		android:background="@color/colorBlack"/>
+</LinearLayout>

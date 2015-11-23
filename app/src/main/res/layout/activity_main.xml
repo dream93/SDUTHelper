@@ -9,7 +9,7 @@
 		android:id="@+id/main_fragment_container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_above="@+id/bottom_bar_radioGraoup"></FrameLayout>
+		android:layout_above="@+id/bottom_bar_radioGraoup"/>
 
 	<RadioGroup
 		android:id="@+id/bottom_bar_radioGraoup"
@@ -55,19 +55,6 @@
 			android:paddingTop="5dp"
 			android:text="@string/life"
 			android:textColor="@color/radiogroup_btn_bgcolor"/>
-
-		<RadioButton
-			android:id="@+id/bottom_bar_queryBtn"
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
-			android:button="@null"
-			android:drawableTop="@drawable/icon_menu_btn_query"
-			android:gravity="center"
-			android:paddingTop="5dp"
-			android:text="@string/query"
-			android:textColor="@color/radiogroup_btn_bgcolor"/>
-
 
 		<RadioButton
 			android:id="@+id/bottom_bar_myBtn"

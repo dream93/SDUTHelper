@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="260dp"
+              android:background="@mipmap/bg_input"
+              android:orientation="vertical">
+
+	<EditText
+		android:id="@+id/learn_zf_xh_input"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/fragment_input_heigth"
+		android:layout_marginEnd="@dimen/fragment_input_heigth"
+		android:layout_marginLeft="@dimen/fragment_input_heigth"
+		android:layout_marginRight="@dimen/fragment_input_heigth"
+		android:layout_marginStart="@dimen/fragment_input_heigth"
+		android:layout_marginTop="@dimen/fragment_input_inner_padding"
+		android:background="@drawable/bg_input_text"
+		android:hint="@string/input_studentId"
+		android:inputType="number"
+		android:paddingLeft="@dimen/input_text_padding"
+		android:paddingStart="@dimen/input_text_padding"/>
+
+	<EditText
+		android:id="@+id/learn_zf_psw_input"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/fragment_input_heigth"
+		android:layout_marginEnd="@dimen/fragment_input_heigth"
+		android:layout_marginLeft="@dimen/fragment_input_heigth"
+		android:layout_marginRight="@dimen/fragment_input_heigth"
+		android:layout_marginStart="@dimen/fragment_input_heigth"
+		android:layout_marginTop="@dimen/fragment_twoInput_height"
+		android:background="@drawable/bg_input_text"
+		android:hint="@string/input_jwcPsw"
+		android:inputType="textPassword"
+		android:paddingLeft="@dimen/input_text_padding"
+		android:paddingStart="@dimen/input_text_padding"/>
+
+		<CheckBox
+			android:id="@+id/learn_zf_rememberLogin"
+			android:layout_width="wrap_content"
+			android:layout_height="@dimen/fragment_title_marginTop"
+			android:layout_marginLeft="@dimen/fragment_title_marginTop"
+			android:layout_marginStart="@dimen/fragment_title_marginTop"
+			android:background="@color/colorcheckBg"
+			android:checked="false"
+			android:padding="@dimen/input_text_radio"
+			android:layout_marginTop="@dimen/fragment_twoInput_height"
+			android:text="@string/rememberLogin"
+			android:textColor="@color/colorBlack"/>
+
+		<Button
+			android:id="@+id/learn_zf_loginBtn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/fragment_input_inner_padding"
+			android:gravity="center"
+			android:layout_gravity="center_horizontal"
+			android:text="@string/login"/>
+</LinearLayout>

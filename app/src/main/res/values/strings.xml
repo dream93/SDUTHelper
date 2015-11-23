@@ -23,6 +23,8 @@
     <!-- 学习有关的字符串 -->
     <string name="gpa_cur">绩点查询</string>
     <string name="zf_login">正方登陆</string>
+    <string name="cet_query">英语等级查询</string>
+    <string name="score_info">成绩信息</string>
 
     <string name="life">生活</string>
     <string name="learn">学习</string>

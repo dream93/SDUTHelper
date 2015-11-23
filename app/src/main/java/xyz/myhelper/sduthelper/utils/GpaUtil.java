@@ -1,13 +1,10 @@
 package xyz.myhelper.sduthelper.utils;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import xyz.myhelper.sduthelper.bean.GpaBean;
 import xyz.myhelper.sduthelper.bean.NewGpaBean;
-import xyz.myhelper.sduthelper.model.Schedule;
 
 /**
  * Created by dream on 15-11-22.
@@ -38,8 +35,7 @@ public class GpaUtil {
         List<NewGpaBean> newOneList = changeScore(oneLists);
 
         // 由新集合计算绩点
-        double[] gpa = new double[]{getGpaNum(newOneList), getGpaNum(newTwoList)};
-        return gpa;
+        return new double[]{getGpaNum(newOneList), getGpaNum(newTwoList)};
     }
 
     private static double getGpaNum(List<NewGpaBean> mLists){
@@ -60,7 +56,6 @@ public class GpaUtil {
         double sumScore = 0; //总成绩
         double sumGrade = 0; // 总学分
         for (int i= 0; i < mLists.size(); i++){
-            Log.i("MyTag",mLists.get(i).getSubject() + "--" + mLists.get(i).getGrade() +"===" + mLists.get(i).getScore());
             sumGrade += mLists.get(i).getGrade();
             sumScore += mLists.get(i).getScore() * mLists.get(i).getGrade();
         }
@@ -130,7 +125,7 @@ public class GpaUtil {
     // 判断是否是数字
     private boolean isNumeric(String str){
         try {
-            double num=Double.valueOf(str);//字符串强制转换数字
+            Double.valueOf(str);//字符串强制转换数字
             return true;//数字返True
         } catch (Exception e) {
             return false;//抛异返False

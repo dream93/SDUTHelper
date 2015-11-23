@@ -25,6 +25,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".activity.ScheduleActivity" />
         <activity android:name=".activity.GpaActivity"/>
+        <activity android:name=".activity.ZFJWActivity"/>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -178,7 +179,6 @@ public class ScheduleFragment extends Fragment {
         // 获取成功登陆后的HttpClient实例
         DefaultHttpClient mHttpClient = MyZF.getM_instance().getmHttpClient();
 
-        // 从网络加载数据
         String scheInfo = MyHttpClientUtil.getUrl(POST_PATH + xh + "&xm=" + username
                 + "&gnmkdm=" + "N121603", mHttpClient, POST_PATH + xh);
 

@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,21 +27,27 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import xyz.myhelper.sduthelper.R;
 import xyz.myhelper.sduthelper.activity.GpaActivity;
+import xyz.myhelper.sduthelper.activity.ZFJWActivity;
 import xyz.myhelper.sduthelper.net.NetWorkSingleTon;
 import xyz.myhelper.sduthelper.utils.FileSave;
 import xyz.myhelper.sduthelper.utils.ToastUtil;
+import xyz.myhelper.sduthelper.utils.zfutils.LoginZf;
+import xyz.myhelper.sduthelper.utils.zfutils.net.MyHttpClientUtil;
+import xyz.myhelper.sduthelper.utils.zfutils.utils.MyZF;
 
 /**
  * @author dream
  * @version 1.o
- * 学习界面
- * Created by dream on 15-11-20.
+ *          学习界面
+ *          Created by dream on 15-11-20.
  */
 public class LearnFragment extends Fragment {
 
@@ -65,9 +72,17 @@ public class LearnFragment extends Fragment {
     private String filePath;
     private File parentPath;
     private Handler handler = new Handler();
+    private String zfXh, zfPsw;
 
     // 绩点请求的参数
     public static final String GPA_POST_URL = "http://210.44.176.116/cjcx/zcjcx_list.php";
+    private boolean isZfRemember;
+    private Button zfLogin;
+    private EditText zfXhEt;
+    private EditText zfPswEt;
+    private String username;
+    private CheckBox rememberZf;
+    private String scoreInfo;
 
 
     @Override
@@ -77,18 +92,100 @@ public class LearnFragment extends Fragment {
         initComponent();
         initView();
         initGpaView();
+        initZfView();
         initData();
         return view;
     }
 
+    private void initZfView() {
+        zfLogin = (Button) zfLoginView.findViewById(R.id.learn_zf_loginBtn);
+        zfLogin.setOnClickListener(new BtnClick());
+        zfXhEt = (EditText) zfLoginView.findViewById(R.id.learn_zf_xh_input);
+        zfPswEt = (EditText) zfLoginView.findViewById(R.id.learn_zf_psw_input);
+        rememberZf = (CheckBox) zfLoginView.findViewById(R.id.learn_zf_rememberLogin);
+        rememberZf.setOnCheckedChangeListener(new CBChecked());
+    }
+
+    // 登陆正方的相关方法
+    private void goZfLogin() {
+        zfXh = zfXhEt.getText().toString();
+        zfPsw = zfPswEt.getText().toString();
+        if (TextUtils.isEmpty(zfXh) || TextUtils.isEmpty(zfPsw)) {
+            ToastUtil.showToast(getActivity(), "密码或账号不能为空");
+            return;
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                LoginZf loginZf = new LoginZf();
+                int loginState = loginZf.checkUser(zfXh, zfPsw);
+                if (loginState == 1) {
+                    username = loginZf.getName();
+                    // 登陆成功,判断用户是否勾选了自动登陆或者记录密码
+                    if (isZfRemember) { // 如果用户选择了记住密码，则将账号和密码保存
+                        editor.putString("zfXh", zfXh);
+                        editor.putString("zfPsw", zfPsw);
+                        editor.commit();
+                    }
+                    goZfActivity();
+                } else { // 返回了错误值，提示用户
+                    String notice;
+                    if (loginState == 0) {
+                        notice = "请检查账号或密码";
+                    } else if (loginState == -1) {
+                        notice = "暂无法与服务器连接，稍后再试";
+                    } else if (loginState == -2) {
+                        notice = "登陆失败， 系统正忙";
+                    } else {
+                        notice = "未知错误";
+                    }
+                    final String finalNotice = notice;
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtil.showToast(getActivity(), finalNotice);
+                        }
+                    });
+                }
+            }
+        }).start();
+
+    }
+
+    private void goZfActivity() {
+        setListViewData();
+        Intent intent = new Intent(getActivity(), ZFJWActivity.class);
+        intent.putExtra("scoreInfo", scoreInfo);
+        startActivity(intent);
+    }
+
+    private void setListViewData() {
+
+        // 获取成功登陆后的HttpClient实例
+        DefaultHttpClient mHttpClient = MyZF.getM_instance().getmHttpClient();
+        // 从网络加载数据
+        scoreInfo = MyHttpClientUtil.getUrl("http://210.44.176.46/xscjcx_dq.aspx?xh=" + zfXh + "&xm=" + username
+                + "&gnmkdm=" + "N121605", mHttpClient, "http://210.44.176.46/xs_main.aspx?xh=" + zfXh);
+    }
+
+
     private void initData() {
-        sharedPreferences = getActivity().getSharedPreferences("gpa", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences("learn", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         isGpaRemember = sharedPreferences.getBoolean("isGpaRemember", false);
-        boolean isZfRemember = sharedPreferences.getBoolean("isZfRemember", false);
+        isZfRemember = sharedPreferences.getBoolean("isZfRemember", false);
         if (isGpaRemember) {
             rememberGpaXh.setChecked(true);
             setGpaInput();
         }
+
+    }
+
+    private void setZfInput() {
+        zfXh = sharedPreferences.getString("zfXh", "");
+        zfPsw = sharedPreferences.getString("zfPsw", "");
+        zfXhEt.setText(zfXh);
+        zfPswEt.setText(zfPsw);
     }
 
     private void setGpaInput() {
@@ -116,13 +213,13 @@ public class LearnFragment extends Fragment {
     private void initView() {
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
         gpaLoginView = mInflater.inflate(R.layout.leanrn_login_gpa, null);
-        zfLoginView = mInflater.inflate(R.layout.layout_login_input, null);
+        zfLoginView = mInflater.inflate(R.layout.learn_login_zf, null);
         views[0] = gpaLoginView;
         views[1] = zfLoginView;
     }
 
     // 初始化绩点登陆页面组件
-    private void initGpaView(){
+    private void initGpaView() {
         gpaLoginBtn = (Button) gpaLoginView.findViewById(R.id.leanrn_login_gap_loginBtn);
         gpaLoginBtn.setOnClickListener(new BtnClick());
         gpaLoadBtn = (Button) gpaLoginView.findViewById(R.id.learn_login_gpa_loadBtn);
@@ -133,29 +230,32 @@ public class LearnFragment extends Fragment {
     }
 
     // 按钮的监听事件
-    class BtnClick implements View.OnClickListener{
+    class BtnClick implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.leanrn_login_gap_loginBtn:
                     goGpaLogin();
                     break;
                 case R.id.learn_login_gpa_loadBtn:
                     goGpaLoad();
                     break;
+                case R.id.learn_zf_loginBtn:
+                    goZfLogin();
+                    break;
             }
         }
     }
 
     private void goGpaLoad() {
-        if (isGpaXhEmpty()){
+        if (isGpaXhEmpty()) {
             ToastUtil.showToast(getActivity(), "学号不能为空");
             return;
         }
-        if (!parentPath.exists()){
+        if (!parentPath.exists()) {
             ToastUtil.showToast(getActivity(), "本地文件不存在，请选择在线方式");
-        }else{
+        } else {
             goGpaActivity();
         }
     }
@@ -171,25 +271,25 @@ public class LearnFragment extends Fragment {
         RequestQueue requestQueue = NetWorkSingleTon.getRequestQueue();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, GPA_POST_URL,
                 new Response.Listener<String>() {
-            @Override
-            public void onResponse(String s) {
-                if (s.contains("没有该学号(" + post_xuehao + ")的基本信息。")){
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ToastUtil.showToast(getActivity(), "没有该学号的信息");
+                    @Override
+                    public void onResponse(String s) {
+                        if (s.contains("没有该学号(" + post_xuehao + ")的基本信息。")) {
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ToastUtil.showToast(getActivity(), "没有该学号的信息");
+                                }
+                            });
+                        } else {
+                            if (parentPath.exists()) {
+                                parentPath.delete();
+                            }
+                            FileSave.contentSavaToFlie(s, post_xuehao + ".html", filePath);
+                            goGpaActivity();
                         }
-                    });
-                }else {
-                    if (parentPath.exists()){
-                        parentPath.delete();
-                    }
-                    FileSave.contentSavaToFlie(s, post_xuehao + ".html", filePath);
-                    goGpaActivity();
-                }
 
-            }
-        }, new Response.ErrorListener() {
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 
@@ -203,7 +303,7 @@ public class LearnFragment extends Fragment {
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String>  map = new HashMap<>();
+                Map<String, String> map = new HashMap<>();
                 map.put("post_xuehao", post_xuehao);
                 return map;
             }
@@ -211,16 +311,15 @@ public class LearnFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    private void goGpaActivity(){
-        if (rememberGpaXh.isChecked()){
-            editor.putString("xh", gpaXh);
+    private void goGpaActivity() {
+        if (rememberGpaXh.isChecked()) {
+            editor.putString("gpaXh", gpaXh);
             editor.commit();
         }
         Intent intent = new Intent(getActivity(), GpaActivity.class);
         intent.putExtra("xh", gpaXh);
         startActivity(intent);
     }
-
 
 
     private boolean isGpaXhEmpty() {
@@ -251,15 +350,22 @@ public class LearnFragment extends Fragment {
         }
     }
 
-    class CBChecked implements CompoundButton.OnCheckedChangeListener{
+    class CBChecked implements CompoundButton.OnCheckedChangeListener {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (buttonView == rememberGpaXh){
-                if (isChecked){
-                    editor = sharedPreferences.edit();
+            if (buttonView == rememberGpaXh) {
+                if (isChecked) {
                     editor.putBoolean("isGpaRemember", true);
-                }else {
+                } else {
                     editor.putBoolean("isGpaRemember", false);
+                }
+                editor.commit();
+            }
+            if (buttonView == rememberZf) {
+                if (isChecked) {
+                    editor.putBoolean("isZfRemember", true);
+                } else {
+                    editor.putBoolean("isZfRemember", false);
                 }
                 editor.commit();
             }
@@ -282,6 +388,10 @@ public class LearnFragment extends Fragment {
                 zfBtn.setBackgroundResource(R.drawable.radio_button_right_select_false);
                 zfBtn.setTextColor(0xff0080ff);
             } else if (position == 1) {
+                if (isZfRemember) {
+                    rememberZf.setChecked(true);
+                    setZfInput();
+                }
                 gpaBtn.setBackgroundResource(R.drawable.radio_button_left_select_false);
                 gpaBtn.setTextColor(0xff0080ff);
                 zfBtn.setBackgroundResource(R.drawable.radio_button_right_select_true);

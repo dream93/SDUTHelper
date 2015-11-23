@@ -2,6 +2,7 @@ package xyz.myhelper.sduthelper.utils.zfutils;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreConnectionPNames;
 
@@ -54,6 +55,7 @@ public class LoginZf {
                 }
             }
         }
+
         List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
         pairs.add(new BasicNameValuePair("__VIEWSTATE", __VIEWSTATE));
         pairs.add(new BasicNameValuePair("txtUserName", username));
@@ -61,7 +63,6 @@ public class LoginZf {
         pairs.add(new BasicNameValuePair("RadioButtonList1", "%D1%A7%C9%FA"));
         pairs.add(new BasicNameValuePair("Button1", null));
         pairs.add(new BasicNameValuePair("lbLanguage", null));
-        pairs.add(new BasicNameValuePair("Button1", null));
 
         String info = "";
         try {

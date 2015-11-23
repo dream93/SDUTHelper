@@ -5,12 +5,27 @@
                 android:layout_height="match_parent"
                 tools:context=".GpaActivity">
 
+	<Button
+		android:id="@+id/gpa_exit"
+		android:padding="5dp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/exitLogin"/>
+
 	<TextView
 		android:id="@+id/allGPA_showId"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:textColor="@color/colorBlack"
+		android:layout_toRightOf="@id/gpa_exit"
 		android:textSize="16sp"/>
+	<Button
+		android:id="@+id/gpa_cet"
+		android:padding="5dp"
+		android:layout_alignParentRight="true"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/cet_query"/>
 
 	<TextView
 		android:id="@+id/allGPA_showInfo"
@@ -34,12 +49,18 @@
 		android:background="@color/colorBlack"/>
 
 	<ListView
+		android:id="@+id/cet_show_list"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/allGPA_line"
+		android:visibility="gone"/>
+
+	<ListView
 		android:id="@+id/gpa_show_list"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_below="@id/allGPA_line"
+		android:layout_below="@id/cet_show_list"
 		android:divider="#000"
-		android:dividerHeight="1dp">
-	</ListView>
+		android:dividerHeight="1dp"/>
 
 </RelativeLayout>
