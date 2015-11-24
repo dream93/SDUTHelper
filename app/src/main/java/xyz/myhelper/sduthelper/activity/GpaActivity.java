@@ -1,14 +1,17 @@
 package xyz.myhelper.sduthelper.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -54,6 +57,7 @@ public class GpaActivity extends BaseActivity {
     private CetAdapter cetAdapter;
     public static final String CET_URL = "http://210.44.176.116/cjcx/stkcjcx_list.php";
     private String post_xuehao;
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +104,8 @@ public class GpaActivity extends BaseActivity {
         cetBtn.setOnClickListener(new BtnClick());
         cetListView = (ListView) findViewById(R.id.cet_show_list);
         cetList = new ArrayList<>();
-        cetAdapter = new CetAdapter(this, cetList);
+        cetAdapter = new CetAdapter(GpaActivity.this, cetList);
+        cetListView.setAdapter(cetAdapter);
 
     }
 
@@ -113,24 +118,30 @@ public class GpaActivity extends BaseActivity {
                     finish();
                     break;
                 case R.id.gpa_cet:
-                    cetListView.setAdapter(cetAdapter);
-                    cetListView.setVisibility(View.VISIBLE);
+                    if (flag) {
+                        mListView.setVisibility(View.GONE);
+                        cetListView.setVisibility(View.VISIBLE);
+                        cetBtn.setText("绩点查询");
+                        flag = false;
+                        if (cetList.size() != 0){
+                            return;
+                        }
+                    }else{
+                        mListView.setVisibility(View.VISIBLE);
+                        cetListView.setVisibility(View.GONE);
+                        cetBtn.setText("英语等级查询");
+                        flag = true;
+                        return;
+                    }
                     RequestQueue requestQueue = NetWorkSingleTon.getRequestQueue();
                     StringRequest request = new StringRequest(Request.Method.POST, CET_URL, new Response.Listener<String>() {
                         @Override
-                        public void onResponse(final String s) {
-                            Handler handler = new Handler();
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        List<CetBean> tempList;
-                                      tempList = CetParse.getCetList(s);
-                                        if (tempList != null) {
-                                            cetList.addAll(tempList);
-
-                                        }
-                                    }
-                                });
+                        public void onResponse(String s) {
+                            List<CetBean> temLists =CetParse.getCetList(s);
+                            if (temLists != null) {
+                                cetList.addAll(temLists);
+                                cetAdapter.notifyDataSetChanged();
+                            }
 
                         }
                     }, new Response.ErrorListener() {
@@ -148,7 +159,6 @@ public class GpaActivity extends BaseActivity {
 
                     };
                     requestQueue.add(request);
-                    break;
             }
         }
     }

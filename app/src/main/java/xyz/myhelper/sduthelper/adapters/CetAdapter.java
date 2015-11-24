@@ -1,6 +1,8 @@
 package xyz.myhelper.sduthelper.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import java.util.List;
 
 import xyz.myhelper.sduthelper.R;
 import xyz.myhelper.sduthelper.bean.CetBean;
+import xyz.myhelper.sduthelper.utils.LogUtil;
 
 
 /**
@@ -44,8 +47,8 @@ public class CetAdapter extends BaseAdapter {
         if (convertView == null){
             vh = new ViewHolder();
             convertView = mInflater.inflate(R.layout.listview_item_cet, parent, false);
-            vh.id = (TextView) convertView.findViewById(R.id.item_cet_id);
             vh.num = (TextView) convertView.findViewById(R.id.item_cet_num);
+            vh.id = (TextView) convertView.findViewById(R.id.item_cet_id);
             vh.time = (TextView) convertView.findViewById(R.id.item_cet_time);
             vh.type = (TextView) convertView.findViewById(R.id.item_cet_type);
             vh.score = (TextView) convertView.findViewById(R.id.item_cet_score);
@@ -54,12 +57,31 @@ public class CetAdapter extends BaseAdapter {
             vh = (ViewHolder) convertView.getTag();
         }
         CetBean cet = mLists.get(position);
-        vh.id.setText(cet.getId());
         vh.num.setText(cet.getNum());
-        vh.time.setText(cet.getTime());
+        vh.id.setText(cet.getId());
+
+        String temp = cet.getTime();
+        try{
+            temp = temp.substring(0,6);
+        }catch (Exception e){
+            LogUtil.setNoClassLog("不用转换");
+        }
+        vh.time.setText(temp);
         vh.type.setText(cet.getType());
         vh.score.setText(cet.getScore());
-        return null;
+      /*  try {
+            double score = Double.parseDouble(cet.getScore());
+            if (score < 300) {
+                vh.score.setBackgroundColor(Color.RED);
+            } else if (score < 425) {
+                vh.score.setBackgroundColor(Color.BLACK);
+            } else {
+                vh.score.setBackgroundColor(Color.GREEN);
+            }
+        }catch (Exception e){
+            LogUtil.setNoClassLog("无需转换");
+        }*/
+        return convertView;
     }
 
     class ViewHolder{

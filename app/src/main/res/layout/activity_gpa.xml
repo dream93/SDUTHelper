@@ -48,19 +48,22 @@
 		android:layout_below="@id/allGpa_showGpa"
 		android:background="@color/colorBlack"/>
 
-	<ListView
-		android:id="@+id/cet_show_list"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_below="@id/allGPA_line"
-		android:visibility="gone"/>
+
 
 	<ListView
 		android:id="@+id/gpa_show_list"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_below="@id/cet_show_list"
+		android:layout_below="@id/allGPA_line"
 		android:divider="#000"
 		android:dividerHeight="1dp"/>
 
+	<ListView
+		android:id="@+id/cet_show_list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@id/allGPA_line"
+		android:visibility="gone"
+		android:divider="#000"
+		android:dividerHeight="1dp"/>
 </RelativeLayout>
